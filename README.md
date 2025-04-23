@@ -17,9 +17,10 @@
 - Windows 10/11、Linux或macOS
 
 ## 交流群
-欢迎进群进行交流讨论
 
-![qr](images/qr.png)
+欢迎进入交流群进行相互讨论学习
+
+ <img src="https://github.com/WoodGoose/dow-849/blob/master/images/qr.png" width="300">
 
 ## 安装步骤
 
