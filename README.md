@@ -89,21 +89,6 @@ pip install -r requirements-optional.txt
 ### 群聊交互
 默认使用`@bot`前缀，例如：`@bot 今天天气怎么样？`
 
-### 基础命令
-- `帮助`或`help`: 显示帮助信息
-- `清空会话`或`clear`: 重置当前对话上下文
-- `设置角色<角色名>`: 切换预设角色
-- `/godmode <密码>`: 管理员模式
-
-## 高级配置
-
-### 协议版本选择
-
-`wx849_protocol_version`可选以下值：
-- `"849"`: iPad版本协议（稳定）
-- `"855"`: 安卓PAD版本协议
-- `"ipad"`: 新版iPad协议
-
 ## 常见问题
 
 ### 服务无法启动
@@ -163,8 +148,11 @@ dow-849/
 ## 贡献
 
 感谢项目：[CoW(chatgpt-on-wechat)](https://github.com/zhayujie/chatgpt-on-wechat)与[DoW(dify-on-wechat)](https://github.com/hanfangyuan4396/dify-on-wechat)
+
 提供了微信机器人的基础架构和核心功能
+
 感谢[xxxbot-pad](https://github.com/NanSsye/xxxbot-pad)
+
 提供的ipad协议跟接入的参考
 
 因本人不会代码，此项目全由ai写作不好的地方
