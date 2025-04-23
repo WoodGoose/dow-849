@@ -16,6 +16,11 @@
 - Redis
 - Windows 10/11、Linux或macOS
 
+## 交流群
+欢迎进群进行交流讨论
+
+![qr](images/qr.png)
+
 ## 安装步骤
 
 ### 1. 下载源码
