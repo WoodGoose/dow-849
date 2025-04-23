@@ -1,6 +1,6 @@
 # DoW-849 微信机器人
 
-基于WX849协议的Dify AI微信接入方案，支持私聊、群聊、图片识别、语音识别等功能（还在实验中，bug较多）。
+基于WX849协议的Dify AI微信接入方案，支持私聊、群聊、图片识别、语音识别等功能（还在实验中，bug较多许多功能暂不可用）。
 
 ## 功能特点
 
@@ -73,7 +73,7 @@ pip install -r requirements-optional.txt
 
 #### Linux/macOS 用户
 
-1. 赋予脚本执行权限：`chmod +x scripts/wx849_*.sh`
+1. 赋予脚本执行权限：`chmod +x scripts/wx849_start.sh`
 2. 运行 `./scripts/wx849_start.sh` 脚本启动 WX849 协议服务
 3. 等待服务完全启动后
 4. 使用 `python app.py` 启动主程序
@@ -160,8 +160,14 @@ dow-849/
 
 本项目采用MIT许可证。详见LICENSE文件。
 
-## 贡献指南
+## 贡献
 
+感谢项目：[CoW(chatgpt-on-wechat)](https://github.com/zhayujie/chatgpt-on-wechat)与[DoW(dify-on-wechat)](https://github.com/hanfangyuan4396/dify-on-wechat)
+提供了微信机器人的基础架构和核心功能
+感谢[xxxbot-pad](https://github.com/NanSsye/xxxbot-pad)
+提供的ipad协议跟接入的参考
+
+因本人不会代码，此项目全由ai写作不好的地方
 欢迎提交Pull Request或Issue来帮助改进本项目！
 
 ---
