@@ -53,10 +53,6 @@ pip install -r requirements-optional.txt
     "wx849_api_host": "127.0.0.1",  # 微信849协议API地址
     "wx849_api_port": 9000,  # 微信849协议API端口
     "wx849_protocol_version": "849",  # 微信849协议版本，可选: "849", "855", "ipad"
-    "wx849_ignore_mode": "None",  # 消息过滤模式，可选: None, Whitelist, Blacklist
-    "wx849_whitelist": [],  # 白名单列表，当 wx849_ignore_mode 为 Whitelist 时生效
-    "wx849_blacklist": [],  # 黑名单列表，当 wx849_ignore_mode 为 Blacklist 时生效
-    "wx849_ignore_protection": False,  # 是否忽略保护模式
     "log_level": "INFO",     
     "debug": true,                       
     "model": "dify",                     
