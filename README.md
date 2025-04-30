@@ -1,10 +1,10 @@
 # DoW-849 微信机器人
 
-基于WX849协议的Dify AI微信接入方案，支持私聊、群聊、图片识别、语音识别等功能。
+基于WX849协议的Dify AI微信接入方案，支持私聊、群聊、图片识别、语音识别等功能（还在实验中，bug较多许多功能暂不可用）。
 
 ## 功能特点
 
-- **多种协议支持**: 支持849(iPad)、855(安卓PAD)、iPad新版协议
+- **多种协议支持**: 支持849(iPad)
 - **高稳定性**: 基于成熟的WX849协议，连接稳定，功能丰富
 - **多样化交互**: 支持文本、图片、语音、文件等多种消息类型
 - **智能对话**: 对接Dify API，提供智能对话服务
@@ -12,17 +12,22 @@
 
 ## 环境要求
 
-- Python 3.8+
-- Redis服务器
+- Python 3.11+
+- Redis
 - Windows 10/11、Linux或macOS
-- 稳定的网络环境
+
+## 交流群
+
+欢迎进入交流群进行相互讨论学习
+
+ <img src="https://github.com/WoodGoose/dow-849/blob/master/images/qr.png" width="300">
 
 ## 安装步骤
 
 ### 1. 下载源码
 
 ```bash
-git clone https://github.com/你的用户名/dow-849.git
+git clone https://github.com/WoodGoose/dow-849.git
 cd dow-849
 ```
 
@@ -42,63 +47,45 @@ pip install -r requirements-optional.txt
 
 ```json
 {
-  "dify_api_base": "https://api.dify.ai/v1",  
-  "dify_api_key": "你的Dify_API_Key",       
-  "channel_type": "wx849",             
-  "wx849_api_host": "127.0.0.1",       
-  "wx849_api_port": 9011,              
-  "wx849_protocol_version": "849",     
-  "debug": true,                       
-  "model": "dify",                     
-  "single_chat_prefix": [""],          
-  "group_chat_prefix": ["@bot"],       
-  "group_name_white_list": ["ALL_GROUP"] 
+    "dify_api_base": "https://api.dify.ai/v1",  
+    "dify_api_key": "你的Dify_API_Key",       
+    "channel_type": "wx849",             
+    "wx849_api_host": "127.0.0.1",  # 微信849协议API地址
+    "wx849_api_port": 9000,  # 微信849协议API端口
+    "wx849_protocol_version": "849",  # 微信849协议版本，可选: "849", "855", "ipad"
+    "wx849_ignore_mode": "None",  # 消息过滤模式，可选: None, Whitelist, Blacklist
+    "wx849_whitelist": [],  # 白名单列表，当 wx849_ignore_mode 为 Whitelist 时生效
+    "wx849_blacklist": [],  # 黑名单列表，当 wx849_ignore_mode 为 Blacklist 时生效
+    "wx849_ignore_protection": False,  # 是否忽略保护模式
+    "log_level": "INFO",     
+    "debug": true,                       
+    "model": "dify",                     
+    "single_chat_prefix": [""],          
+    "group_chat_prefix": ["@bot"],       
+    "group_name_white_list": ["ALL_GROUP"] 
 }
 ```
 
 ## 使用方法
 
-### Windows用户
+#### Windows 用户
 
-1. 启动WX849服务
-   ```bash
-   scripts\wx849_start.bat
-   ```
+1. 运行 `scripts/wx849_start.bat` 脚本启动 WX849 协议服务
+2. 等待服务完全启动后
+3. 使用 `python app.py` 启动主程序
 
-2. 扫描终端显示的二维码登录
+停止服务：
+- 运行 `scripts/wx849_stop.bat` 脚本停止 WX849 协议服务
 
-3. 在另一个终端启动主程序
-   ```bash
-   python app.py
-   ```
+#### Linux/macOS 用户
 
-4. 关闭服务
-   ```bash
-   scripts\wx849_stop.bat
-   ```
+1. 赋予脚本执行权限：`chmod +x scripts/wx849_start.sh`
+2. 运行 `./scripts/wx849_start.sh` 脚本启动 WX849 协议服务
+3. 等待服务完全启动后
+4. 使用 `python app.py` 启动主程序
 
-### Linux/Mac用户
-
-1. 启动WX849服务
-   ```bash
-   chmod +x scripts/wx849_*.sh
-   ./scripts/wx849_start.sh
-   ```
-
-2. 扫描终端显示的二维码登录
-
-3. 在另一个终端启动主程序
-   ```bash
-   python3 app.py
-   # 或使用
-   ./start.sh
-   ```
-
-4. 关闭服务
-   ```bash
-   ./scripts/wx849_stop.sh
-   ./stop.sh
-   ```
+停止服务：
+- 运行 `./scripts/wx849_stop.sh` 脚本停止 WX849 协议服务
 
 ## 消息交互
 
@@ -107,39 +94,6 @@ pip install -r requirements-optional.txt
 
 ### 群聊交互
 默认使用`@bot`前缀，例如：`@bot 今天天气怎么样？`
-
-### 基础命令
-- `帮助`或`help`: 显示帮助信息
-- `清空会话`或`clear`: 重置当前对话上下文
-- `设置角色<角色名>`: 切换预设角色
-- `/godmode <密码>`: 管理员模式
-
-## 高级配置
-
-### 协议版本选择
-
-`wx849_protocol_version`可选以下值：
-- `"849"`: iPad版本协议（稳定）
-- `"855"`: 安卓PAD版本协议
-- `"ipad"`: 新版iPad协议
-
-### 消息过滤
-
-```json
-{
-  "wx849_ignore_mode": "Whitelist",  
-  "wx849_whitelist": ["wxid_xxx", "wxid_yyy"], 
-  "wx849_blacklist": ["wxid_zzz"]
-}
-```
-
-### 日志级别
-
-```json
-{
-  "log_level": "INFO"  // DEBUG, INFO, WARNING, ERROR
-}
-```
 
 ## 常见问题
 
@@ -153,18 +107,6 @@ pip install -r requirements-optional.txt
 - 尝试重启服务
 - 更换协议版本
 
-### 消息不响应
-- 检查白名单/黑名单配置
-- 查看日志是否有错误
-- 尝试使用`help`命令测试
-
-### UNKNOWN错误
-确保`wx849_channel.py`中添加了以下代码：
-```python
-# 添加 ContextType.UNKNOWN 类型（如果不存在）
-if not hasattr(ContextType, 'UNKNOWN'):
-    setattr(ContextType, 'UNKNOWN', 'UNKNOWN')
-```
 
 ## 注意事项
 
@@ -209,8 +151,17 @@ dow-849/
 
 本项目采用MIT许可证。详见LICENSE文件。
 
-## 贡献指南
+## 贡献
 
+感谢项目：[CoW(chatgpt-on-wechat)](https://github.com/zhayujie/chatgpt-on-wechat)与[DoW(dify-on-wechat)](https://github.com/hanfangyuan4396/dify-on-wechat)
+
+提供了微信机器人的基础架构和核心功能
+
+感谢[xxxbot-pad](https://github.com/NanSsye/xxxbot-pad)
+
+提供的ipad协议跟接入的参考
+
+因本人不会代码，此项目全由ai写作不好的地方
 欢迎提交Pull Request或Issue来帮助改进本项目！
 
 ---
