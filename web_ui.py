@@ -94,6 +94,7 @@ def start_channel(channel_name: str):
     channel = channel_factory.create_channel(channel_name)
     available_channels = [
         "wx",
+        "wx849",
         "terminal",
         "wechatmp",
         "wechatmp_service",

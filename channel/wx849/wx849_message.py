@@ -35,9 +35,30 @@ class WX849Message(ChatMessage):
         self.msg_type = msg.get("type", msg.get("Type", msg.get("MsgType", 0)))
         
         # 初始化其他字段
-        self.sender_wxid = ""  # 实际发送者ID
-        self.at_list = []      # 被@的用户列表
+        self.sender_wxid = ""      # 实际发送者ID
+        self.at_list = []          # 被@的用户列表
         self.ctype = ContextType.UNKNOWN
+        self.self_display_name = "" # 机器人在群内的昵称
+        
+        # 添加actual_user_id和actual_user_nickname字段，与sender_wxid保持一致
+        self.actual_user_id = ""    # 实际发送者ID
+        self.actual_user_nickname = "" # 实际发送者昵称
+        
+        # 尝试从MsgSource中提取机器人在群内的昵称
+        try:
+            msg_source = msg.get("MsgSource", "")
+            if msg_source and ("<msgsource>" in msg_source.lower() or msg_source.startswith("<")):
+                root = ET.fromstring(msg_source if "<msgsource>" in msg_source.lower() else f"<msgsource>{msg_source}</msgsource>")
+                
+                # 查找displayname或其他可能包含群昵称的字段
+                for tag in ["selfDisplayName", "displayname", "nickname"]:
+                    elem = root.find(f".//{tag}")
+                    if elem is not None and elem.text:
+                        self.self_display_name = elem.text
+                        break
+        except Exception as e:
+            # 解析失败，保持为空字符串
+            pass
     
     def _get_string_value(self, value):
         """确保值为字符串类型"""
