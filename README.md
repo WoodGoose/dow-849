@@ -20,7 +20,7 @@
 
 欢迎进入交流群进行相互讨论学习
 
- <img src="https://github.com/WoodGoose/dow-849/blob/master/images/qr.png" width="300">
+ <img src="https://github.com/WoodGoose/dow-849/blob/master/images/qr.jpg" width="300">
 
 ## 安装步骤
 
